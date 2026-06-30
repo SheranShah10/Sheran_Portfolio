@@ -1,0 +1,113 @@
+/* SkillTree.css — mirrors green/beige layout from user's image exactly */
+.skill-section {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: stretch;
+  border-top:    var(--border);
+  border-bottom: var(--border);
+}
+
+.skill-layout {
+  display: flex;
+  flex: 1;
+  min-height: 100vh;
+}
+
+/* ── LEFT — green side ── */
+.skill-left {
+  width: 36%;
+  background: var(--green);
+  border-right: var(--border);
+  padding: 5rem 2.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  justify-content: center;
+}
+
+.skill-eyebrow {
+  font-size: 0.75rem;
+  letter-spacing: 3px;
+  color: rgba(245,240,232,0.5);
+}
+
+.skill-intro {
+  color: var(--cream);
+  font-size: 1rem;
+  line-height: 1.7;
+  opacity: 0.85;
+}
+
+.skill-tabs {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  margin-top: 1rem;
+}
+
+.skill-tab {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  background: transparent;
+  color: var(--cream);
+  border: 2px solid rgba(245,240,232,0.2);
+  border-radius: var(--radius);
+  padding: 0.85rem 1.2rem;
+  font-size: 0.9rem;
+  letter-spacing: 2px;
+  text-align: left;
+  transition: var(--transition);
+}
+.skill-tab:hover {
+  border-color: rgba(245,240,232,0.5);
+  background: rgba(245,240,232,0.08);
+}
+.skill-tab.active {
+  background: var(--accent);
+  border-color: var(--dark);
+  color: var(--white);
+  box-shadow: var(--shadow-sm);
+  transform: translateX(6px);
+}
+
+/* ── RIGHT — cream side ── */
+.skill-right {
+  flex: 1;
+  background: var(--cream);
+  padding: 5rem 3rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2.5rem;
+  justify-content: center;
+}
+
+.skill-big {
+  font-size: clamp(3.5rem, 7vw, 6.5rem);
+  line-height: 0.9;
+  color: var(--dark);
+  text-shadow: 5px 5px 0 rgba(0,0,0,0.07);
+  letter-spacing: -2px;
+}
+
+.skill-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.skill-node {
+  background: var(--white);
+  padding: 0.75rem 1.2rem;
+  font-weight: 700;
+  font-size: 0.95rem;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-sm);
+}
+
+@media (max-width: 700px) {
+  .skill-layout { flex-direction: column; }
+  .skill-left { width: 100%; border-right: none; border-bottom: var(--border); }
+  .skill-big { font-size: 3rem; }
+}

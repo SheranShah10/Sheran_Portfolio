@@ -1,0 +1,65 @@
+.leadership-section {
+  position: relative;
+}
+
+.leadership-subtitle {
+  text-align: center;
+  font-size: 1.2rem;
+  color: var(--neon-pink);
+  font-family: 'Fira Code', monospace;
+  margin-top: -2rem;
+  margin-bottom: 4rem;
+}
+
+.leadership-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+  gap: 2rem;
+}
+
+.leadership-card {
+  display: flex;
+  gap: 1.5rem;
+  align-items: flex-start;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.leadership-card:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--glow-purple);
+  border-color: rgba(176, 38, 255, 0.3);
+}
+
+.leadership-icon-wrapper {
+  background: rgba(176, 38, 255, 0.1);
+  color: var(--neon-purple);
+  padding: 1rem;
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.role-title {
+  font-size: 1.3rem;
+  font-weight: 700;
+  margin-bottom: 0.2rem;
+}
+
+.role-org {
+  font-size: 1rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+}
+
+.role-desc {
+  color: var(--text-secondary);
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+
+@media (max-width: 600px) {
+  .leadership-grid {
+    grid-template-columns: 1fr;
+  }
+}

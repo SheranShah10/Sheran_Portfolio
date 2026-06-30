@@ -1,0 +1,72 @@
+.skills-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2rem;
+}
+
+.skill-cluster {
+  position: relative;
+  overflow: hidden;
+  border-top: 2px solid var(--cluster-color);
+}
+
+.cluster-title {
+  font-size: 1.2rem;
+  margin-bottom: 1.5rem;
+  color: var(--cluster-color);
+  font-weight: 600;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+.chips-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.8rem;
+}
+
+.skill-chip {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 0.6rem 1rem;
+  border-radius: 20px;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  overflow: hidden;
+  transition: border-color 0.3s;
+}
+
+.skill-chip:hover {
+  border-color: var(--cluster-color);
+}
+
+.skill-name {
+  font-weight: 500;
+  color: var(--text-primary);
+  transition: transform 0.3s;
+}
+
+.skill-level {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0.5);
+  opacity: 0;
+  font-size: 0.8rem;
+  color: var(--cluster-color);
+  font-weight: 700;
+  text-transform: uppercase;
+  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.skill-chip:hover .skill-name {
+  transform: translateY(-20px);
+  opacity: 0;
+}
+
+.skill-chip:hover .skill-level {
+  transform: translate(-50%, -50%) scale(1);
+  opacity: 1;
+}

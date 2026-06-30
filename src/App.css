@@ -1,0 +1,20 @@
+.app-wrap {
+  position: relative;
+  z-index: 1;
+}
+
+/* Hide default cursor only when we are hovering and showing custom cursor */
+.app-wrap:has(a:hover, button:hover, input:hover, textarea:hover) * {
+  cursor: none !important;
+}
+
+/* ── Progress bar ── */
+.progress-bar {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  height: 6px;
+  background: var(--red);
+  border-bottom: 2px solid var(--dark);
+  transform-origin: 0%;
+  z-index: 9999;
+}

@@ -1,0 +1,50 @@
+.projects-section { background: var(--white); }
+
+.proj-subtitle {
+  font-size: 1.9rem;
+  color: var(--red);
+  margin-top: -2.5rem;
+  margin-bottom: 3rem;
+}
+
+.proj-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.8rem;
+}
+
+.proj-card { padding: 0; overflow: hidden; }
+
+.proj-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.2rem 1.5rem;
+  border-bottom: var(--border);
+}
+
+.proj-emoji { font-size: 3rem; line-height: 1; }
+
+.proj-gh-btn {
+  font-size: 0.8rem;
+  padding: 0.45rem 0.9rem;
+}
+
+.proj-body {
+  padding: 1.5rem;
+  background: var(--white);
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+}
+
+.proj-title { font-size: 1.1rem; line-height: 1.2; }
+.proj-desc  { font-size: 0.9rem; color: #555; line-height: 1.6; }
+
+.proj-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  padding-top: 0.5rem;
+  border-top: 2px dashed rgba(0,0,0,0.12);
+}
