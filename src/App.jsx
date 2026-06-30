@@ -15,6 +15,7 @@ import Footer from './components/Footer';
 import Chatbot from './components/Chatbot';
 import CommandCenter from './components/CommandCenter';
 import BackToTop from './components/BackToTop';
+import Preloader from './components/Preloader';
 import './App.css';
 
 function App() {
@@ -40,6 +41,8 @@ function App() {
 
   return (
     <div className="app-root">
+      <Preloader />
+
       {/* Scroll progress bar */}
       <motion.div className="scroll-bar" style={{ scaleX }} />
 

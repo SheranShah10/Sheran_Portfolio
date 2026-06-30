@@ -14,7 +14,45 @@
     <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Noto+Nastaliq+Urdu:wght@400;700&display=swap" rel="stylesheet" />
   </head>
   <body>
-    <div id="root"></div>
+    <style>
+      body { margin: 0; background-color: #07070F; }
+      #initial-loader {
+        position: fixed; inset: 0; display: flex; flex-direction: column;
+        align-items: center; justify-content: center; z-index: 99999;
+        background: #07070F; font-family: 'Space Grotesk', sans-serif; gap: 20px;
+      }
+      .loader-logo {
+        font-size: 2.5rem; font-weight: 800; letter-spacing: -0.02em;
+        background: linear-gradient(135deg, #A78BFA, #06B6D4);
+        -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+        animation: pulse 1.5s ease-in-out infinite alternate;
+      }
+      .loader-track {
+        width: 120px; height: 2px; background: rgba(255,255,255,0.1);
+        border-radius: 2px; overflow: hidden;
+      }
+      .loader-fill {
+        width: 100%; height: 100%;
+        background: linear-gradient(to right, #7C3AED, #06B6D4);
+        transform-origin: left; animation: load 1.2s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+      }
+      @keyframes pulse {
+        0% { opacity: 0.6; filter: blur(1px); }
+        100% { opacity: 1; filter: blur(0); }
+      }
+      @keyframes load {
+        0% { transform: scaleX(0); transform-origin: left; }
+        49% { transform: scaleX(1); transform-origin: left; }
+        51% { transform: scaleX(1); transform-origin: right; }
+        100% { transform: scaleX(0); transform-origin: right; }
+      }
+    </style>
+    <div id="root">
+      <div id="initial-loader">
+        <div class="loader-logo">SS</div>
+        <div class="loader-track"><div class="loader-fill"></div></div>
+      </div>
+    </div>
     <script type="module" src="/src/main.jsx"></script>
   </body>
 </html>

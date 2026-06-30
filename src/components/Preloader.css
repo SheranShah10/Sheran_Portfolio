@@ -1,0 +1,50 @@
+.react-preloader {
+  position: fixed;
+  inset: 0;
+  z-index: 99999;
+  background: #07070F;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+}
+
+.loader-logo-react {
+  font-family: var(--font-display);
+  font-size: 2.5rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  background: linear-gradient(135deg, var(--violet-lt), var(--cyan));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: pulse-react 1.5s ease-in-out infinite alternate;
+}
+
+.loader-track-react {
+  width: 120px;
+  height: 2px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.loader-fill-react {
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(to right, var(--violet), var(--cyan));
+  transform-origin: left;
+  animation: load-react 1.2s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+}
+
+@keyframes pulse-react {
+  0% { opacity: 0.6; filter: blur(1px); }
+  100% { opacity: 1; filter: blur(0); }
+}
+
+@keyframes load-react {
+  0% { transform: scaleX(0); transform-origin: left; }
+  49% { transform: scaleX(1); transform-origin: left; }
+  51% { transform: scaleX(1); transform-origin: right; }
+  100% { transform: scaleX(0); transform-origin: right; }
+}
