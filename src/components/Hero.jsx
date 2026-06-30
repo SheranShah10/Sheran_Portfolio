@@ -115,7 +115,6 @@ const Hero = () => {
           transition={{ delay: 0.9 }}
         >
           Building elegant digital experiences from Pakistan 🇵🇰 — where clean code meets creative vision.
-          <span className="urdu-inline">ہائر کر لو!</span>
         </motion.p>
 
         {/* CTAs */}
