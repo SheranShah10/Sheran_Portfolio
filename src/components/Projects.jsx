@@ -5,9 +5,9 @@ import './Projects.css';
 const projects = [
   {
     emoji: '🧠',
-    title: "Parkinson's ML Predictor",
-    desc: 'Built a robust ML model achieving 95% accuracy in predicting Parkinson\'s disease from clinical datasets. Demonstrated strong data preprocessing and algorithmic evaluation skills.',
-    tech: ['Python', 'Scikit-learn', 'Pandas'],
+    title: "Parkinson's ML Predictor (FYP)",
+    desc: 'Final Year Project (FYP) focused on predicting Parkinson\'s disease from clinical datasets. This project is currently in progress, with ongoing work in data preprocessing and model training.',
+    tech: ['Python', 'Scikit-learn', 'Pandas', 'In Progress'],
     github: 'https://github.com/SyedSheran10',
     color: 'var(--pink)',
   },

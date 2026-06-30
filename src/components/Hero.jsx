@@ -56,12 +56,7 @@ const Hero = () => {
     mouseY.set((e.clientY - rect.top)  / rect.height - 0.5);
   };
 
-  const floatingCards = [
-    { label: '3+',     sub: 'Internships',           color: 'var(--violet)' },
-    { label: '1100+',  sub: 'Event Attendees',        color: 'var(--cyan)'   },
-    { label: '95%',    sub: 'ML Model Accuracy',      color: 'var(--pink)'   },
-    { label: '15+',    sub: 'Projects Shipped',       color: 'var(--green)'  },
-  ];
+
 
   return (
     <section
@@ -120,7 +115,7 @@ const Hero = () => {
           transition={{ delay: 0.9 }}
         >
           Building elegant digital experiences from Pakistan 🇵🇰 — where clean code meets creative vision.
-          <span className="urdu-inline"> نوکری نہ ملی تو رکشہ ہی سہی</span>
+          <span className="urdu-inline">ہائر کر لو!</span>
         </motion.p>
 
         {/* CTAs */}
@@ -138,28 +133,7 @@ const Hero = () => {
           </MagneticButton>
         </motion.div>
 
-        {/* Floating stat cards */}
-        <motion.div
-          className="hero-stats"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 1.2 }}
-        >
-          {floatingCards.map((card, i) => (
-            <motion.div
-              key={i}
-              className="hero-stat-card glass"
-              whileHover={{ scale: 1.06, y: -4 }}
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 1.2 + i * 0.1 }}
-              style={{ '--card-color': card.color }}
-            >
-              <span className="stat-num display">{card.label}</span>
-              <span className="stat-sub">{card.sub}</span>
-            </motion.div>
-          ))}
-        </motion.div>
+
       </div>
 
       {/* Scroll Indicator */}

@@ -1,0 +1,107 @@
+.dotpath-section {
+  position: relative;
+  padding: 0;
+  min-height: 140vh; /* Shorter to reduce empty scroll space */
+}
+
+.dotpath-container {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.dotpath-svg {
+  position: absolute;
+  width: 100%;
+  max-width: 1200px;
+  height: 100%;
+  z-index: 1;
+}
+
+.dotpath-bg {
+  stroke: var(--border-md);
+  stroke-width: 3;
+  stroke-dasharray: 8 6;
+  fill: none;
+}
+
+.dotpath-fill {
+  stroke: var(--violet-lt);
+  stroke-width: 4;
+  fill: none;
+  stroke-linecap: round;
+  filter: drop-shadow(0 0 10px rgba(124,58,237,0.8));
+}
+
+.dotpath-dot {
+  fill: var(--violet-lt);
+  filter: drop-shadow(0 0 10px var(--violet));
+  z-index: 5;
+}
+
+.dotpath-glow {
+  fill: rgba(124,58,237,0.15);
+  filter: blur(8px);
+  z-index: 4;
+}
+
+/* Labels along the path */
+.dotpath-labels {
+  position: absolute;
+  inset: 0;
+  z-index: 10;
+  pointer-events: none;
+}
+
+.dotpath-label {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  will-change: transform, opacity;
+}
+
+.dotpath-label.is-right {
+  right: 22%;
+  flex-direction: row-reverse;
+  text-align: right;
+}
+
+.dotpath-label.is-left {
+  left: 22%;
+}
+
+.dotpath-icon {
+  font-size: 2.5rem;
+  filter: drop-shadow(0 0 12px rgba(124,58,237,0.4));
+}
+
+.dotpath-title {
+  font-size: clamp(2rem, 4vw, 3.5rem);
+  line-height: 1.1;
+  margin-bottom: 0.25rem;
+}
+
+.dotpath-desc {
+  font-size: 0.95rem;
+  color: var(--text-md);
+  font-weight: 500;
+}
+
+@media (max-width: 768px) {
+  .dotpath-svg { width: 40%; }
+  .dotpath-label.is-right,
+  .dotpath-label.is-left {
+    right: auto;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+    flex-direction: column;
+  }
+  .dotpath-icon { font-size: 2rem; }
+  .dotpath-title { font-size: 1.8rem; }
+}

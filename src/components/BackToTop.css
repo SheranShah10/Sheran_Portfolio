@@ -1,0 +1,33 @@
+.floating-btt {
+  position: fixed;
+  bottom: 2rem;
+  left: 2rem;
+  z-index: 4000;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text);
+  background: var(--glass-md);
+  border: 1px solid var(--border-md);
+  cursor: pointer;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+  transition: border-color 0.3s, color 0.3s;
+}
+
+.floating-btt:hover {
+  border-color: var(--violet);
+  color: var(--violet-lt);
+  background: color-mix(in srgb, var(--violet) 20%, var(--glass-md));
+}
+
+@media (max-width: 500px) {
+  .floating-btt {
+    left: 1rem;
+    bottom: 1rem;
+    width: 44px;
+    height: 44px;
+  }
+}

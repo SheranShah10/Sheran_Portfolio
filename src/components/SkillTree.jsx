@@ -1,17 +1,57 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Code2, Database, BrainCircuit } from 'lucide-react';
+import { Code2, Database, BrainCircuit, ChevronRight } from 'lucide-react';
 import './SkillTree.css';
 
-const categories = [
-  { id: 'frontend', label: 'Frontend',  icon: Code2,        color: 'var(--violet)',   skills: ['React.js', 'TypeScript', 'JavaScript (ES6+)', 'HTML5 / CSS3', 'Framer Motion', 'Tailwind CSS'] },
-  { id: 'backend',  label: 'Backend',   icon: Database,     color: 'var(--cyan)',     skills: ['Node.js', 'Express.js', 'MongoDB', 'C++', 'RESTful APIs', 'Python'] },
-  { id: 'ai',       label: 'AI & Data', icon: BrainCircuit, color: 'var(--pink)',     skills: ['Scikit-learn', 'Pandas / NumPy', 'AI Agents', 'Prompt Engineering', 'LLM Integration', 'Data Preprocessing'] },
+const tree = [
+  {
+    id: 'frontend',
+    label: 'Frontend',
+    icon: Code2,
+    color: 'var(--violet)',
+    branches: [
+      { name: 'React.js',         level: 90 },
+      { name: 'TypeScript',       level: 80 },
+      { name: 'JavaScript (ES6+)', level: 95 },
+      { name: 'HTML5 / CSS3',      level: 95 },
+      { name: 'Framer Motion',    level: 85 },
+      { name: 'Tailwind CSS',     level: 80 },
+    ],
+  },
+  {
+    id: 'backend',
+    label: 'Backend',
+    icon: Database,
+    color: 'var(--cyan)',
+    branches: [
+      { name: 'Node.js',          level: 85 },
+      { name: 'Express.js',       level: 80 },
+      { name: 'MongoDB',          level: 75 },
+      { name: 'C++',              level: 90 },
+      { name: 'RESTful APIs',     level: 85 },
+      { name: 'Python',           level: 80 },
+    ],
+  },
+  {
+    id: 'ai',
+    label: 'AI & Data',
+    icon: BrainCircuit,
+    color: 'var(--pink)',
+    branches: [
+      { name: 'Scikit-learn',       level: 85 },
+      { name: 'Pandas / NumPy',     level: 80 },
+      { name: 'AI Agents',          level: 75 },
+      { name: 'Prompt Engineering', level: 90 },
+      { name: 'LLM Integration',   level: 80 },
+      { name: 'Data Preprocessing', level: 85 },
+    ],
+  },
 ];
 
 const SkillTree = () => {
-  const [active, setActive] = useState(0);
-  const cat = categories[active];
+  const [openId, setOpenId] = useState(null);
+
+  const toggle = (id) => setOpenId(openId === id ? null : id);
 
   return (
     <section className="section skill-section" id="skills">
@@ -22,60 +62,109 @@ const SkillTree = () => {
           viewport={{ once: true }}
         >
           <p className="section-label">Technical Arsenal</p>
-          <h2 className="section-title">Skills &<br /><span className="gradient-text">Expertise</span></h2>
+          <h2 className="section-title">Skill<br /><span className="gradient-text">Tree</span></h2>
         </motion.div>
 
-        {/* Tab Selector */}
-        <div className="skill-tabs">
-          {categories.map((c, i) => {
-            const Icon = c.icon;
+        <div className="tree-container">
+          {/* Trunk line */}
+          <div className="tree-trunk" />
+
+          {tree.map((node, idx) => {
+            const Icon = node.icon;
+            const isOpen = openId === node.id;
+
             return (
-              <button
-                key={c.id}
-                className={`skill-tab ${active === i ? 'active' : ''}`}
-                style={{ '--tab-color': c.color }}
-                onClick={() => setActive(i)}
+              <motion.div
+                key={node.id}
+                className="tree-node"
+                initial={{ opacity: 0, x: -30 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true, margin: '-60px' }}
+                transition={{ delay: idx * 0.1 }}
               >
-                <Icon size={16} />
-                <span>{c.label}</span>
-                {active === i && (
+                {/* Root / parent node */}
+                <motion.button
+                  className={`tree-root glass ${isOpen ? 'is-open' : ''}`}
+                  onClick={() => toggle(node.id)}
+                  whileHover={{ scale: 1.02 }}
+                  whileTap={{ scale: 0.98 }}
+                  style={{ '--ncolor': node.color }}
+                >
+                  <div className="tree-root-left">
+                    <div className="tree-root-icon">
+                      <Icon size={20} />
+                    </div>
+                    <span className="tree-root-label">{node.label}</span>
+                    <span className="tree-root-count">{node.branches.length} skills</span>
+                  </div>
                   <motion.div
-                    className="tab-indicator"
-                    layoutId="skillTabIndicator"
-                    transition={{ type: 'spring', stiffness: 400, damping: 30 }}
-                  />
-                )}
-              </button>
+                    animate={{ rotate: isOpen ? 90 : 0 }}
+                    transition={{ duration: 0.2 }}
+                    className="tree-chevron"
+                  >
+                    <ChevronRight size={18} />
+                  </motion.div>
+                </motion.button>
+
+                {/* Branch connector line */}
+                <AnimatePresence>
+                  {isOpen && (
+                    <motion.div
+                      className="tree-branch-connector"
+                      style={{ '--ncolor': node.color }}
+                      initial={{ height: 0, opacity: 0 }}
+                      animate={{ height: 'auto', opacity: 1 }}
+                      exit={{ height: 0, opacity: 0 }}
+                      transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
+                    />
+                  )}
+                </AnimatePresence>
+
+                {/* Branches (child skills) */}
+                <AnimatePresence>
+                  {isOpen && (
+                    <motion.div
+                      className="tree-branches"
+                      initial={{ opacity: 0, height: 0 }}
+                      animate={{ opacity: 1, height: 'auto' }}
+                      exit={{ opacity: 0, height: 0 }}
+                      transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
+                    >
+                      {node.branches.map((b, i) => (
+                        <motion.div
+                          key={b.name}
+                          className="tree-leaf"
+                          style={{ '--ncolor': node.color }}
+                          initial={{ opacity: 0, x: -20, scale: 0.9 }}
+                          animate={{ opacity: 1, x: 0, scale: 1 }}
+                          exit={{ opacity: 0, x: -20, scale: 0.9 }}
+                          transition={{ delay: i * 0.05, type: 'spring', stiffness: 200 }}
+                        >
+                          {/* Branch line */}
+                          <div className="leaf-branch-line" />
+
+                          {/* Leaf node */}
+                          <div className="leaf-content glass">
+                            <div className="leaf-dot" />
+                            <span className="leaf-name">{b.name}</span>
+                            <div className="leaf-bar-track">
+                              <motion.div
+                                className="leaf-bar-fill"
+                                initial={{ width: 0 }}
+                                animate={{ width: `${b.level}%` }}
+                                transition={{ delay: i * 0.05 + 0.2, duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+                              />
+                            </div>
+                          </div>
+                        </motion.div>
+                      ))}
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </motion.div>
             );
           })}
         </div>
-
-        {/* Skills Grid */}
-        <AnimatePresence mode="wait">
-          <motion.div
-            key={active}
-            className="skills-grid"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-            transition={{ duration: 0.25 }}
-          >
-            {cat.skills.map((s, i) => (
-              <motion.div
-                key={s}
-                className="skill-chip glass"
-                initial={{ opacity: 0, scale: 0.8 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ delay: i * 0.05, type: 'spring', stiffness: 200 }}
-                whileHover={{ scale: 1.06, y: -3 }}
-                style={{ '--chip-color': cat.color }}
-              >
-                <div className="chip-dot" />
-                <span>{s}</span>
-              </motion.div>
-            ))}
-          </motion.div>
-        </AnimatePresence>
       </div>
     </section>
   );

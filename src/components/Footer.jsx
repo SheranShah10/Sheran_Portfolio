@@ -9,7 +9,6 @@ const Footer = () => (
         <div className="footer-brand">
           <h3 className="footer-logo display gradient-text-v">Sheran Shah</h3>
           <p className="footer-tagline">AI Engineer · Full-Stack Developer · Creative Technologist</p>
-          <p className="footer-urdu urdu">نوکری نہ ملی تو رکشہ ہی سہی 🇵🇰</p>
         </div>
 
         <div className="footer-links">
