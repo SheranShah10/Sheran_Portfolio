@@ -35,18 +35,19 @@
   color: var(--dark);
   position: relative;
   transition: color 0.2s;
-}
-.nav-link::after {
-  content: '';
-  position: absolute;
-  bottom: -4px; left: 0;
-  width: 0; height: 3px;
-  background: var(--red);
-  border-radius: 2px;
-  transition: width 0.2s;
+  padding-bottom: 4px; /* Space for the line */
 }
 .nav-link:hover { color: var(--red); }
-.nav-link:hover::after { width: 100%; }
+
+.nav-hover-line {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: var(--red);
+  border-radius: 2px;
+}
 
 .nav-actions {
   display: flex;

@@ -1,0 +1,87 @@
+.mascot-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  margin-bottom: 2rem;
+  cursor: pointer;
+  z-index: 10;
+}
+
+.mascot-body {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.mascot-antenna {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transform-origin: bottom;
+  margin-bottom: -4px;
+  z-index: 2;
+}
+
+.antenna-ball {
+  width: 14px;
+  height: 14px;
+  background: var(--red);
+  border: 2px solid var(--dark);
+  border-radius: 50%;
+  box-shadow: 2px 2px 0 var(--dark);
+}
+
+.antenna-stick {
+  width: 4px;
+  height: 15px;
+  background: var(--dark);
+}
+
+.mascot-head {
+  width: 80px;
+  height: 70px;
+  background: var(--white);
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 10px;
+  position: relative;
+  z-index: 3;
+}
+
+.mascot-eyes {
+  display: flex;
+  gap: 16px;
+}
+
+.eye {
+  width: 12px;
+  height: 16px;
+  background: var(--blue);
+  border-radius: 8px;
+  border: 2px solid var(--dark);
+}
+
+.mascot-mouth {
+  background: var(--yellow);
+  border: 2px solid var(--dark);
+  transition: all 0.2s;
+}
+
+.mascot-shadow {
+  width: 60px;
+  height: 8px;
+  background: rgba(0, 0, 0, 0.15);
+  border-radius: 50%;
+  margin-top: 15px;
+  filter: blur(2px);
+}
+
+.dark-theme .mascot-shadow {
+  background: rgba(255, 255, 255, 0.1);
+}

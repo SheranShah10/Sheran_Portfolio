@@ -3,32 +3,89 @@ import { Code2 } from 'lucide-react';
 import './Projects.css';
 
 const projects = [
-  { emoji: '✈️', title: 'Booking Management System',  desc: 'CLI-based travel management with advanced OOP and File I/O for persistent storage.',     tech: ['C++', 'OOP', 'File I/O'],         github: 'https://github.com/SyedSheran10/Booking-Management-System-C-', bg: 'var(--red)'    },
-  { emoji: '🍕', title: 'Pizzeria Web App',           desc: 'Interactive pizza ordering app with dynamic DOM and responsive design.',                  tech: ['HTML', 'CSS', 'JavaScript'],       github: 'https://github.com/SyedSheran10/pizzeria',                     bg: 'var(--yellow)', dark: true },
-  { emoji: '📚', title: 'Student Grading System',    desc: 'Academic management tool with structured data processing and conditional logic.',          tech: ['C++', 'Logic', 'Data Structures'], github: 'https://github.com/SyedSheran10/Student-Grading-System',       bg: 'var(--green)'  },
-  { emoji: '🧠', title: 'Psychology Website',         desc: 'A clean platform for psychology professionals with strong UI/UX focus.',                   tech: ['HTML', 'CSS', 'JS', 'UI/UX'],     github: 'https://github.com/SheranShah10/psychology-website',           bg: 'var(--blue)'   },
+  { 
+    emoji: '🧠', 
+    title: 'Parkinson\'s ML Predictor',  
+    desc: 'Developed a robust Machine Learning model predicting Parkinson\'s disease with 95% accuracy using clinical datasets. Showcased strong data preprocessing and algorithmic evaluation skills.',     
+    tech: ['Python', 'Scikit-learn', 'Pandas'],         
+    github: 'https://github.com/SyedSheran10', // Placeholder as not provided
+    bg: 'var(--red)'    
+  },
+  { 
+    emoji: '✈️', 
+    title: 'Booking Management Engine',  
+    desc: 'Architected a CLI-based travel management system featuring advanced OOP principles and persistent File I/O storage, handling complex state and data flow.',     
+    tech: ['C++', 'OOP', 'File I/O'],         
+    github: 'https://github.com/SyedSheran10/Booking-Management-System-C-', 
+    bg: 'var(--blue)'    
+  },
+  { 
+    emoji: '🍕', 
+    title: 'Pizzeria Interactive App',           
+    desc: 'Built a responsive, interactive pizza ordering web application emphasizing dynamic DOM manipulation and seamless user experience.',                  
+    tech: ['HTML', 'CSS', 'JavaScript'],       
+    github: 'https://github.com/SyedSheran10/pizzeria',                     
+    bg: 'var(--yellow)', 
+    dark: true 
+  },
+  { 
+    emoji: '📚', 
+    title: 'Academic Grading System',    
+    desc: 'Engineered an academic management tool processing structured student data using conditional logic and custom data structures for efficient retrieval.',          
+    tech: ['C++', 'Logic', 'Data Structures'], 
+    github: 'https://github.com/SyedSheran10/Student-Grading-System',       
+    bg: 'var(--green)'  
+  },
 ];
+
+const containerVariants = {
+  hidden: { opacity: 0 },
+  show: {
+    opacity: 1,
+    transition: { staggerChildren: 0.15 }
+  }
+};
+
+const cardVariants = {
+  hidden: { opacity: 0, y: 50 },
+  show: { opacity: 1, y: 0, transition: { type: 'spring', stiffness: 100 } }
+};
 
 const Projects = () => (
   <section className="section projects-section" id="projects">
     <div className="container">
-      <h2 className="section-title display">My Projects</h2>
-      <p className="proj-subtitle urdu">کام ایسا کرو کہ لوگ یاد رکھیں</p>
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, margin: '-50px' }}
+      >
+        <h2 className="section-title display">My Projects</h2>
+        <p className="proj-subtitle urdu">کام ایسا کرو کہ لوگ یاد رکھیں</p>
+      </motion.div>
 
-      <div className="proj-grid">
+      <motion.div 
+        className="proj-grid"
+        variants={containerVariants}
+        initial="hidden"
+        whileInView="show"
+        viewport={{ once: true, margin: '-100px' }}
+      >
         {projects.map((p, i) => (
           <motion.div
             key={i}
             className="proj-card card"
-            initial={{ opacity: 0, y: 50, rotate: -2 }}
-            whileInView={{ opacity: 1, y: 0, rotate: 0 }}
-            viewport={{ once: true, margin: '-80px' }}
-            transition={{ delay: i * 0.1, type: 'spring', stiffness: 120 }}
-            whileHover={{ rotate: 1.5, scale: 1.02 }}
+            variants={cardVariants}
+            whileHover={{ scale: 1.03, rotate: 1 }}
           >
             {/* Coloured header */}
             <div className="proj-top" style={{ background: p.bg }}>
-              <span className="proj-emoji">{p.emoji}</span>
+              <motion.span 
+                className="proj-emoji"
+                whileHover={{ scale: 1.3, rotate: -10 }}
+                transition={{ type: "spring", stiffness: 300 }}
+              >
+                {p.emoji}
+              </motion.span>
               <a href={p.github} target="_blank" rel="noreferrer" className="proj-gh-btn btn btn-white">
                 <Code2 size={16} /> GitHub
               </a>
@@ -44,7 +101,7 @@ const Projects = () => (
             </div>
           </motion.div>
         ))}
-      </div>
+      </motion.div>
     </div>
   </section>
 );

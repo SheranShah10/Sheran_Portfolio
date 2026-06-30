@@ -1,16 +1,15 @@
-import { motion } from 'framer-motion';
+import { motion, useScroll } from 'framer-motion';
 import { GraduationCap, Video, Users, Code2, Lightbulb, Brain } from 'lucide-react';
 import { useRef } from 'react';
-import { useScroll } from 'framer-motion';
 import './ScrollJourney.css';
 
 const steps = [
-  { icon: GraduationCap, title: 'Bahria University',    urdu: 'علم کا سفر شروع',    desc: 'Started BSIT — deep dived into computer science foundations.',     bg: 'var(--blue)'   },
-  { icon: Video,          title: 'Video Editor',         urdu: 'کہانی سنانے کا فن',  desc: 'Joined Khalq, blending storytelling with visual media production.', bg: 'var(--red)'    },
-  { icon: Users,          title: 'NGOs & Leadership',    urdu: 'لوگوں سے لوگوں تک', desc: 'General Secretary at Business Society — connecting people & ideas.', bg: 'var(--yellow)', dark: true },
-  { icon: Code2,          title: 'Web Dev Internships',  urdu: 'کوڈ میری پہچان',     desc: 'Built real products at GS TEN, CodexCue & Prodigy.',               bg: 'var(--green)'  },
-  { icon: Lightbulb,      title: 'Built Real Projects',  urdu: 'خیال سے حقیقت تک',  desc: 'Travel booking, pizzeria apps, psychology platforms — shipped.',    bg: 'var(--red)'    },
-  { icon: Brain,          title: 'Exploring AI',         urdu: 'مستقبل کی طرف',      desc: 'Organized Pakistan\'s largest AI Dev Fest. Now building with LLMs.',bg: 'var(--blue)'   },
+  { icon: GraduationCap, title: 'Bahria University',    urdu: 'علم کا سفر شروع',    desc: 'Pursuing BS in Information Technology, focusing on algorithms, data structures, and software engineering principles.',     bg: 'var(--blue)'   },
+  { icon: Video,          title: 'Video Editor @ Khalq',urdu: 'کہانی سنانے کا فن',  desc: 'Directed and edited high-impact visual media, enhancing brand storytelling and engagement metrics.', bg: 'var(--red)'    },
+  { icon: Users,          title: 'NGO Leadership',       urdu: 'لوگوں سے لوگوں تک', desc: 'Served as General Secretary at the Business Society, spearheading community initiatives and coordinating large-scale events.', bg: 'var(--yellow)', dark: true },
+  { icon: Code2,          title: 'Software Engineering', urdu: 'کوڈ میری پہچان',     desc: 'Completed technical internships at GS TEN, CodexCue, & Prodigy, delivering scalable web solutions.',               bg: 'var(--green)'  },
+  { icon: Lightbulb,      title: 'Product Development',  urdu: 'خیال سے حقیقت تک',  desc: 'Architected and shipped multiple full-stack applications including travel management and academic tracking systems.',    bg: 'var(--red)'    },
+  { icon: Brain,          title: 'AI & Data Science',    urdu: 'مستقبل کی طرف',      desc: 'Organized Pakistan\'s largest AI Dev Fest. Currently building LLM integrations and predictive ML models.',bg: 'var(--blue)'   },
 ];
 
 const ScrollJourney = () => {
@@ -20,8 +19,14 @@ const ScrollJourney = () => {
   return (
     <section className="section journey-section" id="journey" ref={ref}>
       <div className="container">
-        <h2 className="section-title display">My Journey</h2>
-        <p className="journey-urdu-sub urdu">سفر جاری ہے...</p>
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: '-50px' }}
+        >
+          <h2 className="section-title display">My Journey</h2>
+          <p className="journey-urdu-sub urdu">سفر جاری ہے...</p>
+        </motion.div>
 
         <div className="journey-path">
           {/* Dashed background line */}
@@ -35,14 +40,22 @@ const ScrollJourney = () => {
             return (
               <div key={i} className={`j-row ${isLeft ? 'j-left' : 'j-right'}`}>
                 {/* Center dot */}
-                <div className="j-dot" style={{ background: step.bg }} />
+                <motion.div 
+                  className="j-dot" 
+                  style={{ background: step.bg }} 
+                  initial={{ scale: 0 }}
+                  whileInView={{ scale: 1 }}
+                  viewport={{ once: true, margin: '-100px' }}
+                  transition={{ type: 'spring', stiffness: 200, delay: 0.2 }}
+                />
 
                 <motion.div
                   className="j-card card"
-                  initial={{ opacity: 0, x: isLeft ? 50 : -50 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true, margin: '-80px' }}
-                  transition={{ type: 'spring', stiffness: 100 }}
+                  initial={{ opacity: 0, x: isLeft ? 50 : -50, y: 20 }}
+                  whileInView={{ opacity: 1, x: 0, y: 0 }}
+                  viewport={{ once: true, margin: '-100px' }}
+                  transition={{ type: 'spring', stiffness: 100, delay: 0.1 }}
+                  whileHover={{ scale: 1.02, y: -5 }}
                 >
                   <div className="j-card-top" style={{ background: step.bg }}>
                     <Icon size={22} color={step.dark ? '#111' : '#fff'} />
