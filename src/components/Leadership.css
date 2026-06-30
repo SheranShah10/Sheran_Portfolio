@@ -1,65 +1,64 @@
-.leadership-section {
-  position: relative;
-}
-
-.leadership-subtitle {
-  text-align: center;
-  font-size: 1.2rem;
-  color: var(--neon-pink);
-  font-family: 'Fira Code', monospace;
-  margin-top: -2rem;
-  margin-bottom: 4rem;
-}
+.leadership-section { border-top: 1px solid var(--border); }
 
 .leadership-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
-  gap: 2rem;
-}
-
-.leadership-card {
-  display: flex;
+  grid-template-columns: repeat(2, 1fr);
   gap: 1.5rem;
+}
+
+.leader-card {
+  padding: 2rem;
+  border-radius: var(--radius-lg);
+  display: flex;
+  gap: 1.25rem;
   align-items: flex-start;
-  transition: transform 0.3s, box-shadow 0.3s;
+  position: relative;
+  overflow: hidden;
+  cursor: default;
+  transition: border-color 0.3s;
 }
+.leader-card:hover { border-color: color-mix(in srgb, var(--lcolor) 40%, transparent); }
 
-.leadership-card:hover {
-  transform: translateY(-5px);
-  box-shadow: var(--glow-purple);
-  border-color: rgba(176, 38, 255, 0.3);
-}
-
-.leadership-icon-wrapper {
-  background: rgba(176, 38, 255, 0.1);
-  color: var(--neon-purple);
-  padding: 1rem;
-  border-radius: 16px;
+.leader-icon-wrap {
+  width: 48px; height: 48px;
+  border-radius: 14px;
+  background: color-mix(in srgb, var(--lcolor) 12%, transparent);
+  border: 1px solid color-mix(in srgb, var(--lcolor) 25%, transparent);
   display: flex;
   align-items: center;
   justify-content: center;
+  color: var(--lcolor);
+  flex-shrink: 0;
 }
 
-.role-title {
-  font-size: 1.3rem;
+.leader-title {
+  font-family: var(--font-display);
+  font-size: 1.05rem;
   font-weight: 700;
-  margin-bottom: 0.2rem;
+  color: var(--text);
 }
 
-.role-org {
-  font-size: 1rem;
+.leader-org {
+  font-size: 0.9rem;
   font-weight: 600;
-  margin-bottom: 1rem;
+  margin-top: 0.1rem;
+  margin-bottom: 0.6rem;
 }
 
-.role-desc {
-  color: var(--text-secondary);
-  font-size: 0.95rem;
-  line-height: 1.5;
+.leader-desc {
+  font-size: 0.85rem;
+  color: var(--text-md);
+  line-height: 1.7;
 }
 
-@media (max-width: 600px) {
-  .leadership-grid {
-    grid-template-columns: 1fr;
-  }
+.leader-accent {
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(to right, var(--lcolor), transparent);
+  opacity: 0.6;
+}
+
+@media (max-width: 768px) {
+  .leadership-grid { grid-template-columns: 1fr; }
 }

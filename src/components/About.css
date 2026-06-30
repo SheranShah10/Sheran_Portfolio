@@ -1,0 +1,86 @@
+.about-section { border-top: 1px solid var(--border); }
+
+.about-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 5rem;
+  align-items: center;
+}
+
+.about-bio {
+  color: var(--text-md);
+  line-height: 1.8;
+  font-size: 1rem;
+  margin-bottom: 1.2rem;
+}
+.about-bio strong { color: var(--text); }
+
+.about-urdu {
+  color: var(--violet-lt);
+  font-size: 1.4rem;
+  margin-top: 1rem;
+  display: block;
+}
+
+.about-identities {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+}
+
+.identity-card {
+  padding: 1.2rem 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.7rem;
+  text-align: center;
+  cursor: default;
+  border-radius: var(--radius);
+  position: relative;
+  overflow: hidden;
+  transition: border-color 0.3s;
+}
+.identity-card:hover { border-color: var(--icolor, var(--violet)); }
+
+.identity-icon {
+  width: 44px; height: 44px;
+  border-radius: 12px;
+  background: color-mix(in srgb, var(--icolor, var(--violet)) 15%, transparent);
+  border: 1px solid color-mix(in srgb, var(--icolor, var(--violet)) 30%, transparent);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--icolor, var(--violet));
+}
+
+.identity-label {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--text-md);
+}
+
+.about-fun-card {
+  grid-column: 1 / -1;
+  padding: 1.2rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+.fun-title {
+  font-weight: 600;
+  color: var(--text);
+  font-size: 0.95rem;
+}
+.fun-sub {
+  font-size: 0.8rem;
+  color: var(--text-sm);
+}
+
+@media (max-width: 900px) {
+  .about-grid { grid-template-columns: 1fr; gap: 3rem; }
+  .about-identities { grid-template-columns: repeat(3, 1fr); }
+}
+@media (max-width: 500px) {
+  .about-identities { grid-template-columns: repeat(2, 1fr); }
+}

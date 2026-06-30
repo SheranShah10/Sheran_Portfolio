@@ -8,113 +8,113 @@ const experiences = [
     id: 1,
     role: "Web Developer Intern",
     company: "GS TEN",
-    duration: "August 2024 – October 2024",
+    duration: "Aug 2024 – Oct 2024",
     built: "Built front-end components for client-facing websites and connected UI to APIs.",
-    tech: ["HTML", "CSS", "Bootstrap", "Vanilla JavaScript", "AJAX"],
-    impact: "Improved UI consistency and successfully integrated multiple backend APIs for seamless data flow."
+    tech: ["HTML", "CSS", "Bootstrap", "JavaScript", "AJAX"],
+    impact: "Improved UI consistency and successfully integrated multiple backend APIs for seamless data flow.",
+    color: 'var(--violet)',
   },
   {
     id: 2,
     role: "Web Developer Intern",
     company: "CodexCue",
-    duration: "July 2024 – August 2024",
+    duration: "Jul 2024 – Aug 2024",
     built: "Developed reusable React components for a live SaaS product in an Agile workflow.",
     tech: ["React Hooks", "Axios", "GitHub", "Agile"],
-    impact: "Improved UI load times by 30% through efficient component structuring and state management."
+    impact: "Improved UI load times by 30% through efficient component structuring and state management.",
+    color: 'var(--cyan)',
   },
   {
     id: 3,
     role: "Web Developer Intern",
     company: "Prodigy",
-    duration: "July 2024 – August 2024",
+    duration: "Jul 2024 – Aug 2024",
     built: "Created interactive front-end features and optimized web forms.",
     tech: ["jQuery", "JavaScript", "DOM Manipulation"],
-    impact: "Enhanced performance and DOM manipulation speeds, leading to a smoother user experience."
-  }
+    impact: "Enhanced performance and DOM manipulation speeds, leading to a smoother user experience.",
+    color: 'var(--pink)',
+  },
 ];
 
 const Experience = () => {
   const [expandedId, setExpandedId] = useState(null);
 
-  const toggleExpand = (id) => {
-    setExpandedId(expandedId === id ? null : id);
-  };
-
   return (
     <section className="section experience-section" id="experience">
       <div className="container">
-        <motion.h2 
-          className="section-title text-gradient"
-          initial={{ opacity: 0, x: -30 }}
-          whileInView={{ opacity: 1, x: 0 }}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
         >
-          Experience Timeline
-        </motion.h2>
+          <p className="section-label">Work History</p>
+          <h2 className="section-title">Professional<br /><span className="gradient-text">Experience</span></h2>
+        </motion.div>
 
-        <div className="timeline">
-          <div className="timeline-line"></div>
+        <div className="exp-timeline">
+          <div className="exp-line" />
           {experiences.map((exp, idx) => (
-            <motion.div 
+            <motion.div
               key={exp.id}
-              className="timeline-item"
-              initial={{ opacity: 0, y: 50 }}
+              className="exp-item"
+              initial={{ opacity: 0, y: 40 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-100px" }}
-              transition={{ delay: idx * 0.2 }}
+              viewport={{ once: true, margin: '-80px' }}
+              transition={{ delay: idx * 0.15 }}
             >
-              <div className="timeline-dot">
-                <Briefcase size={16} />
+              <div className="exp-dot" style={{ '--ecolor': exp.color }}>
+                <Briefcase size={14} />
               </div>
-              
-              <motion.div 
-                className="glass-panel exp-card"
+
+              <motion.div
+                className="exp-card glass"
                 layout
-                onClick={() => toggleExpand(exp.id)}
-                whileHover={{ scale: 1.02 }}
+                onClick={() => setExpandedId(expandedId === exp.id ? null : exp.id)}
+                whileHover={{ scale: 1.01 }}
+                style={{ '--ecolor': exp.color }}
               >
-                <motion.div layout className="exp-header">
+                <motion.div layout className="exp-top">
                   <div>
                     <h3 className="exp-role">{exp.role}</h3>
-                    <h4 className="exp-company text-gradient-alt">{exp.company}</h4>
+                    <h4 className="exp-company gradient-text">{exp.company}</h4>
                   </div>
                   <div className="exp-meta">
-                    <span className="exp-date flex-center gap-2">
-                      <Calendar size={14} /> {exp.duration}
+                    <span className="exp-date">
+                      <Calendar size={13} /> {exp.duration}
                     </span>
-                    <button className="expand-btn">
-                      {expandedId === exp.id ? <ChevronUp size={20} /> : <ChevronDown size={20} />}
+                    <button className="exp-toggle">
+                      {expandedId === exp.id ? <ChevronUp size={18} /> : <ChevronDown size={18} />}
                     </button>
                   </div>
                 </motion.div>
 
                 <AnimatePresence>
                   {expandedId === exp.id && (
-                    <motion.div 
+                    <motion.div
                       className="exp-details"
                       initial={{ opacity: 0, height: 0 }}
-                      animate={{ opacity: 1, height: "auto" }}
+                      animate={{ opacity: 1, height: 'auto' }}
                       exit={{ opacity: 0, height: 0 }}
                       transition={{ duration: 0.3 }}
                     >
-                      <div className="detail-section">
+                      <div className="exp-detail-block">
                         <h5>What I Built</h5>
                         <p>{exp.built}</p>
                       </div>
-                      
-                      <div className="detail-section">
-                        <h5>Impact / Learning</h5>
+                      <div className="exp-detail-block">
+                        <h5>Impact</h5>
                         <p>{exp.impact}</p>
                       </div>
-
-                      <div className="tech-stack">
+                      <div className="exp-tech-row">
                         {exp.tech.map((t, i) => (
-                          <span key={i} className="tech-tag">{t}</span>
+                          <span key={i} className="pill">{t}</span>
                         ))}
                       </div>
                     </motion.div>
                   )}
                 </AnimatePresence>
+
+                <div className="exp-accent" />
               </motion.div>
             </motion.div>
           ))}

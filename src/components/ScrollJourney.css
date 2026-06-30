@@ -1,88 +1,114 @@
-.journey-section { background: var(--cream); }
+.journey-section { border-top: 1px solid var(--border); }
 
-.journey-urdu-sub {
-  font-size: 2rem;
-  color: var(--red);
-  margin-top: -2rem;
-  margin-bottom: 3rem;
-}
-
-.journey-path {
+.journey-track {
   position: relative;
-  max-width: 860px;
-  margin: 0 auto;
   padding: 2rem 0;
 }
 
-/* Centre dashed line */
-.j-line-bg {
+/* Center vertical line */
+.journey-line-bg,
+.journey-line-fill {
   position: absolute;
-  top: 0; bottom: 0; left: 50%;
-  width: 4px;
+  left: 50%;
   transform: translateX(-50%);
-  background: repeating-linear-gradient(
-    to bottom,
-    var(--dark) 0 10px,
-    transparent 10px 20px
-  );
-  opacity: 0.2;
+  top: 0; bottom: 0;
+  width: 2px;
 }
 
-/* Animated fill line */
-.j-line-fill {
-  position: absolute;
-  top: 0; bottom: 0; left: 50%;
-  width: 4px;
-  transform: translateX(-50%) scaleY(0);
+.journey-line-bg {
+  background: var(--border);
+}
+
+.journey-line-fill {
+  background: linear-gradient(to bottom, var(--violet), var(--cyan));
   transform-origin: top;
-  background: var(--red);
-  border-radius: 2px;
-  z-index: 1;
+  box-shadow: 0 0 12px var(--violet);
 }
 
-/* Row */
-.j-row {
+/* Each row */
+.journey-row {
+  display: grid;
+  grid-template-columns: 1fr 60px 1fr;
+  align-items: center;
+  gap: 0;
+  margin-bottom: 3.5rem;
   position: relative;
-  width: 50%;
-  padding: 0 2.5rem 2.5rem;
-  z-index: 2;
 }
-.j-left  { left: 0; padding-right: 3.5rem; }
-.j-right { left: 50%; padding-left: 3.5rem; }
 
-/* Dot */
-.j-dot {
-  position: absolute;
-  top: 1rem;
-  width: 18px; height: 18px;
+.journey-node {
+  grid-column: 2;
+  width: 50px; height: 50px;
   border-radius: 50%;
-  border: 3px solid var(--dark);
-  box-shadow: var(--shadow-sm);
-  z-index: 3;
-}
-.j-left  .j-dot { right: -9px; }
-.j-right .j-dot { left: -9px; }
-
-/* Card */
-.j-card { padding: 0; overflow: hidden; }
-
-.j-card-top {
+  background: color-mix(in srgb, var(--ncolor) 15%, var(--bg-2));
+  border: 2px solid var(--ncolor);
+  box-shadow: 0 0 20px color-mix(in srgb, var(--ncolor) 40%, transparent);
   display: flex;
   align-items: center;
-  gap: 0.8rem;
-  padding: 0.9rem 1.2rem;
-  border-bottom: var(--border);
+  justify-content: center;
+  color: var(--ncolor);
+  z-index: 1;
+  justify-self: center;
 }
 
-.j-title { font-size: 1rem; }
+/* Card positioning */
+.is-left .journey-card  { grid-column: 1; grid-row: 1; justify-self: end; }
+.is-right .journey-card { grid-column: 3; grid-row: 1; justify-self: start; }
+.is-left .journey-node  { grid-row: 1; }
+.is-right .journey-node { grid-row: 1; }
 
-.j-card-body { padding: 1rem 1.2rem; background: var(--white); }
+.journey-card {
+  max-width: 380px;
+  width: 100%;
+  padding: 1.75rem;
+  border-radius: var(--radius-lg);
+  position: relative;
+  overflow: hidden;
+  cursor: default;
+}
 
-.j-urdu { font-size: 1.3rem; color: var(--red); }
-.j-desc  { font-size: 0.9rem; color: #555; line-height: 1.6; margin-top: 0.3rem; }
+.journey-card-header {
+  margin-bottom: 0.8rem;
+}
 
-@media (max-width: 700px) {
-  .j-line-bg, .j-line-fill { left: 20px; }
-  .j-row { width: 100%; left: 0 !important; padding-left: 60px !important; padding-right: 1rem !important; }
-  .j-left .j-dot, .j-right .j-dot { left: 11px; right: auto; }
+.journey-title {
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 0.3rem;
+}
+
+.journey-urdu {
+  font-size: 1rem;
+  color: var(--ncolor, var(--violet-lt));
+  display: block;
+}
+
+.journey-desc {
+  font-size: 0.875rem;
+  color: var(--text-md);
+  line-height: 1.7;
+}
+
+.journey-accent-line {
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(to right, var(--ncolor), transparent);
+  opacity: 0.7;
+}
+
+@media (max-width: 768px) {
+  .journey-row {
+    grid-template-columns: 40px 1fr;
+  }
+  .journey-line-bg, .journey-line-fill { left: 19px; }
+  .journey-node { grid-column: 1; width: 38px; height: 38px; }
+  .is-left .journey-card,
+  .is-right .journey-card {
+    grid-column: 2;
+    grid-row: 1;
+    justify-self: stretch;
+    max-width: 100%;
+  }
 }

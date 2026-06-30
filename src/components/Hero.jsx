@@ -1,98 +1,178 @@
-import { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { ChevronDown, Code2, Download } from 'lucide-react';
-import AnimatedMascot from './AnimatedMascot';
+import { useState, useEffect, useRef } from 'react';
+import { motion, AnimatePresence, useMotionValue, useTransform, useSpring } from 'framer-motion';
+import { ChevronDown, Code2, Download, Sparkles } from 'lucide-react';
 import MagneticButton from './MagneticButton';
 import './Hero.css';
 
-const taglines = [
-  { text: 'Nokri na mili toh raksha he sahi', urdu: true  },
-  { text: 'Building ideas into reality.',      urdu: false },
-  { text: 'Desi aesthetics. Modern tech.',     urdu: false },
-  { text: 'کوڈ میرا ہنر، تخلیق میری پہچان',   urdu: true  },
-];
+const ROLES = ['Full-Stack Developer', 'AI Engineer', 'ML Enthusiast', 'Creative Technologist', 'Photographer & Videographer'];
 
-const staggerContainer = {
-  hidden: { opacity: 0 },
-  show: {
-    opacity: 1,
-    transition: { staggerChildren: 0.15, delayChildren: 0.1 }
-  }
-};
-
-const staggerItem = {
-  hidden: { opacity: 0, y: 30 },
-  show: { opacity: 1, y: 0, transition: { type: "spring", stiffness: 80, damping: 15 } }
+// Letter-by-letter animation
+const AnimatedWord = ({ word, className, delay = 0 }) => {
+  const chars = word.split('');
+  return (
+    <span className={className} style={{ display: 'inline-block' }}>
+      {chars.map((char, i) => (
+        <motion.span
+          key={i}
+          style={{ display: 'inline-block' }}
+          initial={{ opacity: 0, y: 80, rotateX: -90 }}
+          animate={{ opacity: 1, y: 0, rotateX: 0 }}
+          transition={{
+            delay: delay + i * 0.04,
+            type: 'spring',
+            stiffness: 100,
+            damping: 15,
+          }}
+        >
+          {char === ' ' ? '\u00A0' : char}
+        </motion.span>
+      ))}
+    </span>
+  );
 };
 
 const Hero = () => {
-  const [idx, setIdx] = useState(0);
+  const [roleIdx, setRoleIdx] = useState(0);
+  const heroRef = useRef(null);
 
+  // Rotate roles
   useEffect(() => {
-    const t = setInterval(() => setIdx(i => (i + 1) % taglines.length), 4000);
+    const t = setInterval(() => setRoleIdx(i => (i + 1) % ROLES.length), 3500);
     return () => clearInterval(t);
   }, []);
 
+  // Mouse parallax for orbs
+  const mouseX = useMotionValue(0);
+  const mouseY = useMotionValue(0);
+  const smoothX = useSpring(mouseX, { stiffness: 60, damping: 20 });
+  const smoothY = useSpring(mouseY, { stiffness: 60, damping: 20 });
+  const orbX = useTransform(smoothX, [-0.5, 0.5], [-30, 30]);
+  const orbY = useTransform(smoothY, [-0.5, 0.5], [-30, 30]);
+
+  const handleMouse = (e) => {
+    const rect = heroRef.current?.getBoundingClientRect();
+    if (!rect) return;
+    mouseX.set((e.clientX - rect.left) / rect.width - 0.5);
+    mouseY.set((e.clientY - rect.top)  / rect.height - 0.5);
+  };
+
+  const floatingCards = [
+    { label: '3+',     sub: 'Internships',           color: 'var(--violet)' },
+    { label: '1100+',  sub: 'Event Attendees',        color: 'var(--cyan)'   },
+    { label: '95%',    sub: 'ML Model Accuracy',      color: 'var(--pink)'   },
+    { label: '15+',    sub: 'Projects Shipped',       color: 'var(--green)'  },
+  ];
+
   return (
-    <section className="hero-section section" id="home">
+    <section
+      className="hero-section"
+      id="home"
+      ref={heroRef}
+      onMouseMove={handleMouse}
+    >
+      {/* Hero-local gradient orbs (react to mouse) */}
+      <motion.div className="hero-orb hero-orb-v" style={{ x: orbX, y: orbY }} />
+      <motion.div className="hero-orb hero-orb-c" style={{ x: useTransform(orbX, v => -v), y: useTransform(orbY, v => -v) }} />
+
       <div className="container hero-container">
-        
-        {/* Mascot */}
-        <AnimatedMascot />
-
-        {/* Content Wrapper for Staggered Animation */}
+        {/* Badge */}
         <motion.div
-          className="hero-content"
-          variants={staggerContainer}
-          initial="hidden"
-          animate="show"
+          className="hero-badge glass pill-v"
+          initial={{ opacity: 0, scale: 0.8 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ delay: 0.2, type: 'spring' }}
         >
-          {/* Status badge */}
-          <motion.div className="hero-badge display" variants={staggerItem}>
-            <span className="badge-dot" /> Open to work
-          </motion.div>
-
-          {/* Name */}
-          <motion.h1 className="hero-name hero-font" variants={staggerItem}>
-            Sheran<br /><span className="name-red">Shah</span>
-          </motion.h1>
-
-          {/* Rotating tagline */}
-          <motion.div className="hero-tagline-wrap" variants={staggerItem}>
-            <AnimatePresence mode="wait">
-              <motion.p
-                key={idx}
-                className={`hero-tagline ${taglines[idx].urdu ? 'urdu' : ''}`}
-                initial={{ opacity: 0, y: 15 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit  ={{ opacity: 0, y: -15 }}
-                transition={{ duration: 0.3 }}
-              >
-                {taglines[idx].text}
-              </motion.p>
-            </AnimatePresence>
-          </motion.div>
-
-          {/* CTA Buttons */}
-          <motion.div className="hero-cta" variants={staggerItem}>
-            <MagneticButton href="#projects" className="btn btn-dark">
-              <Code2 size={18} /> View Projects
-            </MagneticButton>
-            <MagneticButton href="/Sheran_Shah_CV.pdf" download className="btn btn-yellow">
-              <Download size={18} /> Download CV
-            </MagneticButton>
-          </motion.div>
+          <span className="badge-pulse" />
+          <Sparkles size={13} /> Open to Work
         </motion.div>
 
-        {/* Scroll hint */}
-        <motion.div
-          className="hero-scroll"
-          animate={{ y: [0, 8, 0] }}
-          transition={{ repeat: Infinity, duration: 2 }}
+        {/* Name */}
+        <h1 className="hero-name display" style={{ perspective: 1000 }}>
+          <AnimatedWord word="SHERAN" delay={0.3} className="hero-name-line" />
+          <br />
+          <AnimatedWord word="SHAH" delay={0.5} className="hero-name-line gradient-text" />
+        </h1>
+
+        {/* Role Switcher */}
+        <div className="hero-role-wrap">
+          <span className="hero-role-prefix text-md">I am a&nbsp;</span>
+          <div className="hero-role-switcher">
+            <AnimatePresence mode="wait">
+              <motion.span
+                key={roleIdx}
+                className="hero-role gradient-text"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -20 }}
+                transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
+              >
+                {ROLES[roleIdx]}
+              </motion.span>
+            </AnimatePresence>
+          </div>
+        </div>
+
+        {/* Bio */}
+        <motion.p
+          className="hero-bio"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.9 }}
         >
-          <ChevronDown size={28} /> Scroll
+          Building elegant digital experiences from Pakistan 🇵🇰 — where clean code meets creative vision.
+          <span className="urdu-inline"> نوکری نہ ملی تو رکشہ ہی سہی</span>
+        </motion.p>
+
+        {/* CTAs */}
+        <motion.div
+          className="hero-ctas"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 1.0 }}
+        >
+          <MagneticButton href="#projects" className="btn-primary">
+            <Code2 size={16} /> View Projects
+          </MagneticButton>
+          <MagneticButton href="/Sheran_Shah_CV.pdf" download className="btn-outline">
+            <Download size={16} /> Download CV
+          </MagneticButton>
+        </motion.div>
+
+        {/* Floating stat cards */}
+        <motion.div
+          className="hero-stats"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 1.2 }}
+        >
+          {floatingCards.map((card, i) => (
+            <motion.div
+              key={i}
+              className="hero-stat-card glass"
+              whileHover={{ scale: 1.06, y: -4 }}
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 1.2 + i * 0.1 }}
+              style={{ '--card-color': card.color }}
+            >
+              <span className="stat-num display">{card.label}</span>
+              <span className="stat-sub">{card.sub}</span>
+            </motion.div>
+          ))}
         </motion.div>
       </div>
+
+      {/* Scroll Indicator */}
+      <motion.a
+        href="#about"
+        className="scroll-indicator"
+        animate={{ y: [0, 10, 0] }}
+        transition={{ repeat: Infinity, duration: 2, ease: 'easeInOut' }}
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+      >
+        <ChevronDown size={22} />
+      </motion.a>
     </section>
   );
 };

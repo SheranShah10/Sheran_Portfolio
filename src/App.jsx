@@ -1,12 +1,17 @@
-import { useScroll, useSpring, motion, AnimatePresence } from 'framer-motion';
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
+import { useScroll, useSpring, motion } from 'framer-motion';
+import Lenis from 'lenis';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
+import About from './components/About';
 import Stats from './components/Stats';
 import ScrollJourney from './components/ScrollJourney';
 import SkillTree from './components/SkillTree';
 import Projects from './components/Projects';
+import Experience from './components/Experience';
+import Leadership from './components/Leadership';
 import Contact from './components/Contact';
+import Footer from './components/Footer';
 import Chatbot from './components/Chatbot';
 import CommandCenter from './components/CommandCenter';
 import './App.css';
@@ -15,29 +20,51 @@ function App() {
   const { scrollYProgress } = useScroll();
   const scaleX = useSpring(scrollYProgress, { stiffness: 100, damping: 30 });
 
-  // Dark mode state
-  const [isDark, setIsDark] = useState(false);
-
+  // Lenis smooth scroll
   useEffect(() => {
-    if (isDark) {
-      document.documentElement.classList.add('dark-theme');
-    } else {
-      document.documentElement.classList.remove('dark-theme');
+    const lenis = new Lenis({
+      duration: 1.4,
+      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+      smooth: true,
+    });
+
+    function raf(time) {
+      lenis.raf(time);
+      requestAnimationFrame(raf);
     }
-  }, [isDark]);
+    requestAnimationFrame(raf);
+
+    return () => lenis.destroy();
+  }, []);
 
   return (
-    <div className={`app-wrap ${isDark ? 'dark' : ''}`}>
+    <div className="app-root">
       {/* Scroll progress bar */}
-      <motion.div className="progress-bar" style={{ scaleX }} />
+      <motion.div className="scroll-bar" style={{ scaleX }} />
 
-      <Navbar isDark={isDark} toggleDark={() => setIsDark(!isDark)} />
-      <Hero />
-      <Stats />
-      <ScrollJourney />
-      <SkillTree />
-      <Projects />
-      <Contact />
+      {/* Animated background */}
+      <div className="bg-mesh" aria-hidden="true">
+        <div className="orb orb-1" />
+        <div className="orb orb-2" />
+        <div className="orb orb-3" />
+        <div className="noise-overlay" />
+      </div>
+
+      <Navbar />
+
+      <main>
+        <Hero />
+        <About />
+        <Stats />
+        <ScrollJourney />
+        <SkillTree />
+        <Projects />
+        <Experience />
+        <Leadership />
+        <Contact />
+      </main>
+
+      <Footer />
       <Chatbot />
       <CommandCenter />
     </div>

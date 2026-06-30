@@ -1,15 +1,93 @@
-.app-wrap {
+.app-root {
   position: relative;
-  z-index: 1;
+  min-height: 100vh;
+  overflow-x: hidden;
 }
 
-/* ── Progress bar ── */
-.progress-bar {
+/* ── Scroll Progress Bar ── */
+.scroll-bar {
   position: fixed;
   top: 0; left: 0; right: 0;
-  height: 6px;
-  background: var(--red);
-  border-bottom: 2px solid var(--dark);
+  height: 2px;
+  background: linear-gradient(to right, var(--violet), var(--cyan));
   transform-origin: 0%;
   z-index: 9999;
+  box-shadow: 0 0 12px var(--violet);
+}
+
+/* ── Animated Background Mesh ── */
+.bg-mesh {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(120px);
+  opacity: 0.3;
+}
+
+.orb-1 {
+  width: 600px; height: 600px;
+  background: radial-gradient(circle, #7C3AED, transparent 70%);
+  top: -15%;
+  right: -10%;
+  animation: float-1 18s ease-in-out infinite alternate;
+}
+
+.orb-2 {
+  width: 500px; height: 500px;
+  background: radial-gradient(circle, #06B6D4, transparent 70%);
+  bottom: 10%;
+  left: -10%;
+  animation: float-2 22s ease-in-out infinite alternate;
+}
+
+.orb-3 {
+  width: 400px; height: 400px;
+  background: radial-gradient(circle, #EC4899, transparent 70%);
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  animation: float-3 25s ease-in-out infinite alternate;
+  opacity: 0.12;
+}
+
+@keyframes float-1 {
+  from { transform: translate(0, 0) scale(1); }
+  to   { transform: translate(-80px, 60px) scale(1.1); }
+}
+@keyframes float-2 {
+  from { transform: translate(0, 0) scale(1); }
+  to   { transform: translate(80px, -60px) scale(1.15); }
+}
+@keyframes float-3 {
+  from { transform: translate(-50%, -50%) scale(1); }
+  to   { transform: translate(-52%, -48%) scale(1.2); }
+}
+
+/* ── Noise Texture overlay ── */
+.noise-overlay {
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.05'/%3E%3C/svg%3E");
+  opacity: 0.4;
+}
+
+/* ── Section separator line ── */
+section + section::before {
+  display: none;
+}
+
+/* Ensure content is above bg */
+main, header, footer { position: relative; z-index: 1; }
+
+@media (max-width: 768px) {
+  .orb-1 { width: 300px; height: 300px; }
+  .orb-2 { width: 250px; height: 250px; }
+  .orb-3 { width: 200px; height: 200px; }
 }

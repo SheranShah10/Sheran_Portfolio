@@ -4,9 +4,9 @@ import { Code2, Database, BrainCircuit } from 'lucide-react';
 import './SkillTree.css';
 
 const categories = [
-  { id: 'frontend', label: 'FRONTEND', icon: Code2,        color: 'var(--blue)',   skills: ['React.js', 'TypeScript', 'JavaScript (ES6+)', 'HTML5 / CSS3', 'Framer Motion', 'Tailwind CSS'] },
-  { id: 'backend',  label: 'BACKEND',  icon: Database,     color: 'var(--green)',  skills: ['Node.js', 'Express.js', 'MongoDB', 'C++', 'RESTful APIs'] },
-  { id: 'ai',       label: 'AI & DATA',icon: BrainCircuit, color: 'var(--red)',    skills: ['Python', 'Pandas / NumPy', 'Scikit-learn', 'AI Agents', 'Prompt Engineering'] },
+  { id: 'frontend', label: 'Frontend',  icon: Code2,        color: 'var(--violet)',   skills: ['React.js', 'TypeScript', 'JavaScript (ES6+)', 'HTML5 / CSS3', 'Framer Motion', 'Tailwind CSS'] },
+  { id: 'backend',  label: 'Backend',   icon: Database,     color: 'var(--cyan)',     skills: ['Node.js', 'Express.js', 'MongoDB', 'C++', 'RESTful APIs', 'Python'] },
+  { id: 'ai',       label: 'AI & Data', icon: BrainCircuit, color: 'var(--pink)',     skills: ['Scikit-learn', 'Pandas / NumPy', 'AI Agents', 'Prompt Engineering', 'LLM Integration', 'Data Preprocessing'] },
 ];
 
 const SkillTree = () => {
@@ -14,69 +14,69 @@ const SkillTree = () => {
   const cat = categories[active];
 
   return (
-    <section className="skill-section" id="skills">
-      <motion.div 
-        className="skill-layout"
-        initial={{ opacity: 0, y: 40 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, margin: '-100px' }}
-        transition={{ duration: 0.6 }}
-      >
-        {/* ── Left: dark-green panel ── */}
-        <div className="skill-left">
-          <p className="skill-eyebrow display">WHAT I BRING</p>
-          <p className="skill-intro">
-            Delivering robust full-stack architectures, integrating cutting-edge AI solutions, 
-            and driving community leadership — blending technical depth with creative vision.
-          </p>
+    <section className="section skill-section" id="skills">
+      <div className="container">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+        >
+          <p className="section-label">Technical Arsenal</p>
+          <h2 className="section-title">Skills &<br /><span className="gradient-text">Expertise</span></h2>
+        </motion.div>
 
-          <div className="skill-tabs">
-            {categories.map((c, i) => {
-              const Icon = c.icon;
-              return (
-                <button
-                  key={c.id}
-                  className={`skill-tab display ${active === i ? 'active' : ''}`}
-                  style={{ '--accent': c.color }}
-                  onClick={() => setActive(i)}
-                >
-                  <Icon size={18} /> {c.label}
-                </button>
-              );
-            })}
-          </div>
+        {/* Tab Selector */}
+        <div className="skill-tabs">
+          {categories.map((c, i) => {
+            const Icon = c.icon;
+            return (
+              <button
+                key={c.id}
+                className={`skill-tab ${active === i ? 'active' : ''}`}
+                style={{ '--tab-color': c.color }}
+                onClick={() => setActive(i)}
+              >
+                <Icon size={16} />
+                <span>{c.label}</span>
+                {active === i && (
+                  <motion.div
+                    className="tab-indicator"
+                    layoutId="skillTabIndicator"
+                    transition={{ type: 'spring', stiffness: 400, damping: 30 }}
+                  />
+                )}
+              </button>
+            );
+          })}
         </div>
 
-        {/* ── Right: cream panel ── */}
-        <div className="skill-right">
-          <h2 className="skill-big display">TECHNICAL<br />ARSENAL</h2>
-
-          <AnimatePresence mode="wait">
-            <motion.div
-              key={active}
-              className="skill-grid"
-              initial={{ opacity: 0, x: -20 }}
-              animate={{ opacity: 1, x: 0 }}
-              exit={{ opacity: 0, x: 20 }}
-              transition={{ duration: 0.2 }}
-            >
-              {cat.skills.map((s, i) => (
-                <motion.div
-                  key={s}
-                  className="skill-node card"
-                  style={{ borderLeft: `5px solid ${cat.color}` }}
-                  initial={{ scale: 0, opacity: 0 }}
-                  animate={{ scale: 1, opacity: 1 }}
-                  transition={{ delay: i * 0.05, type: 'spring', stiffness: 200 }}
-                  whileHover={{ scale: 1.05, x: 5 }}
-                >
-                  {s}
-                </motion.div>
-              ))}
-            </motion.div>
-          </AnimatePresence>
-        </div>
-      </motion.div>
+        {/* Skills Grid */}
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={active}
+            className="skills-grid"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            transition={{ duration: 0.25 }}
+          >
+            {cat.skills.map((s, i) => (
+              <motion.div
+                key={s}
+                className="skill-chip glass"
+                initial={{ opacity: 0, scale: 0.8 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ delay: i * 0.05, type: 'spring', stiffness: 200 }}
+                whileHover={{ scale: 1.06, y: -3 }}
+                style={{ '--chip-color': cat.color }}
+              >
+                <div className="chip-dot" />
+                <span>{s}</span>
+              </motion.div>
+            ))}
+          </motion.div>
+        </AnimatePresence>
+      </div>
     </section>
   );
 };

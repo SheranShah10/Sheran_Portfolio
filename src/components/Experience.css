@@ -1,49 +1,57 @@
-.timeline {
+.experience-section { border-top: 1px solid var(--border); }
+
+.exp-timeline {
   position: relative;
-  max-width: 800px;
-  margin: 0 auto;
-  padding: 2rem 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  padding-left: 40px;
 }
 
-.timeline-line {
+.exp-line {
   position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 24px;
+  left: 15px; top: 0; bottom: 0;
   width: 2px;
-  background: linear-gradient(to bottom, var(--neon-cyan), var(--neon-purple));
-  opacity: 0.3;
+  background: linear-gradient(to bottom, var(--violet), var(--cyan), transparent);
 }
 
-.timeline-item {
-  position: relative;
-  padding-left: 70px;
-  margin-bottom: 3rem;
-}
+.exp-item { position: relative; }
 
-.timeline-dot {
+.exp-dot {
   position: absolute;
-  left: 11px;
-  top: 24px;
-  width: 28px;
-  height: 28px;
-  background: var(--bg-primary);
-  border: 2px solid var(--neon-cyan);
+  left: -40px; top: 1.5rem;
+  width: 32px; height: 32px;
   border-radius: 50%;
+  background: color-mix(in srgb, var(--ecolor) 15%, var(--bg));
+  border: 2px solid var(--ecolor);
   display: flex;
   align-items: center;
   justify-content: center;
-  color: var(--neon-cyan);
-  box-shadow: var(--glow-cyan);
-  z-index: 2;
+  color: var(--ecolor);
+  box-shadow: 0 0 12px color-mix(in srgb, var(--ecolor) 30%, transparent);
+  z-index: 1;
 }
 
 .exp-card {
+  padding: 1.5rem 2rem;
+  border-radius: var(--radius-lg);
   cursor: pointer;
-  padding: 1.5rem;
+  position: relative;
+  overflow: hidden;
+  transition: border-color 0.3s;
+}
+.exp-card:hover { border-color: color-mix(in srgb, var(--ecolor) 40%, transparent); }
+
+.exp-accent {
+  position: absolute;
+  left: 0; top: 0; bottom: 0;
+  width: 3px;
+  background: var(--ecolor);
+  opacity: 0.6;
+  border-radius: 3px;
 }
 
-.exp-header {
+.exp-top {
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
@@ -51,95 +59,74 @@
 }
 
 .exp-role {
-  font-size: 1.4rem;
+  font-family: var(--font-display);
+  font-size: 1.1rem;
   font-weight: 700;
-  margin-bottom: 0.2rem;
+  color: var(--text);
 }
 
 .exp-company {
-  font-size: 1.1rem;
+  font-size: 0.95rem;
   font-weight: 600;
+  margin-top: 0.15rem;
 }
 
 .exp-meta {
   display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-  gap: 0.5rem;
+  align-items: center;
+  gap: 0.8rem;
+  flex-shrink: 0;
 }
 
 .exp-date {
-  font-size: 0.9rem;
-  color: var(--text-secondary);
-}
-
-.expand-btn {
-  background: none;
-  border: none;
-  color: var(--text-primary);
-  cursor: pointer;
   display: flex;
   align-items: center;
-  justify-content: center;
-  width: 30px;
-  height: 30px;
-  border-radius: 50%;
-  background: rgba(255, 255, 255, 0.05);
-  transition: all 0.3s;
+  gap: 0.3rem;
+  font-size: 0.78rem;
+  color: var(--text-sm);
+  font-family: var(--font-mono);
 }
 
-.expand-btn:hover {
-  background: rgba(0, 240, 255, 0.2);
-  color: var(--neon-cyan);
+.exp-toggle {
+  color: var(--text-sm);
+  padding: 0.3rem;
+  border-radius: 6px;
+  transition: all 0.2s;
 }
+.exp-toggle:hover { color: var(--violet-lt); background: var(--glass); }
 
 .exp-details {
-  margin-top: 1.5rem;
-  padding-top: 1.5rem;
-  border-top: 1px solid var(--glass-border);
-  display: flex;
-  flex-direction: column;
-  gap: 1.5rem;
+  margin-top: 1.25rem;
   overflow: hidden;
 }
 
-.detail-section h5 {
-  font-size: 0.9rem;
+.exp-detail-block {
+  margin-bottom: 1rem;
+}
+.exp-detail-block h5 {
+  font-family: var(--font-display);
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--violet-lt);
   text-transform: uppercase;
-  color: var(--neon-purple);
-  letter-spacing: 1px;
-  margin-bottom: 0.5rem;
+  letter-spacing: 0.1em;
+  margin-bottom: 0.3rem;
+}
+.exp-detail-block p {
+  font-size: 0.88rem;
+  color: var(--text-md);
+  line-height: 1.7;
 }
 
-.detail-section p {
-  color: var(--text-secondary);
-  line-height: 1.6;
-}
-
-.tech-stack {
+.exp-tech-row {
   display: flex;
   flex-wrap: wrap;
   gap: 0.5rem;
 }
 
-.tech-tag {
-  background: rgba(176, 38, 255, 0.1);
-  color: var(--text-primary);
-  padding: 0.3rem 0.8rem;
-  border-radius: 12px;
-  font-size: 0.8rem;
-  border: 1px solid rgba(176, 38, 255, 0.3);
-}
-
 @media (max-width: 600px) {
-  .exp-header {
-    flex-direction: column;
-  }
-  .exp-meta {
-    align-items: flex-start;
-    flex-direction: row-reverse;
-    justify-content: space-between;
-    width: 100%;
-    margin-top: 1rem;
-  }
+  .exp-timeline { padding-left: 30px; }
+  .exp-dot { left: -30px; width: 26px; height: 26px; }
+  .exp-top { flex-direction: column; gap: 0.5rem; }
+  .exp-card { padding: 1.2rem 1.3rem; }
 }

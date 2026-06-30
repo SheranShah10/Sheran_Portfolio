@@ -107,7 +107,7 @@ const Chatbot = () => {
                 onChange={e => setInput(e.target.value)}
                 onKeyDown={e => e.key === 'Enter' && send()}
               />
-              <button className="btn btn-yellow cb-send" onClick={send} disabled={loading}>
+              <button className="cb-send" onClick={send} disabled={loading}>
                 <Send size={18} />
               </button>
             </div>
@@ -116,12 +116,12 @@ const Chatbot = () => {
       </AnimatePresence>
 
       <motion.button
-        className="cb-toggle btn btn-dark"
+        className="cb-toggle"
         whileHover={{ scale: 1.1 }}
         whileTap={{ scale: 0.9 }}
         onClick={() => setOpen(o => !o)}
       >
-        {open ? <X size={24} /> : <MessageSquare size={24} />}
+        {open ? <X size={22} /> : <MessageSquare size={22} />}
       </motion.button>
     </div>
   );
