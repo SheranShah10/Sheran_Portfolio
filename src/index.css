@@ -65,6 +65,77 @@
   --section-py:   6rem;
 }
 
+[data-theme='light'] {
+  --bg:           #F8FAFC;
+  --bg-2:         #F1F5F9;
+  --bg-card:      rgba(0,0,0,0.04);
+  --bg-hover:     rgba(0,0,0,0.08);
+  --violet:       #6D28D9;
+  --violet-lt:    #8B5CF6;
+  --cyan:         #0891B2;
+  --cyan-lt:      #06B6D4;
+  --text:         #0F172A;
+  --text-md:      #334155;
+  --text-sm:      #475569;
+  --text-xs:      #64748B;
+  --border:       rgba(0,0,0,0.08);
+  --border-md:    rgba(0,0,0,0.15);
+  --glass:        rgba(255,255,255,0.6);
+  --glass-md:     rgba(255,255,255,0.8);
+  --border-glow-v: rgba(109,40,217,0.3);
+  --border-glow-c: rgba(8,145,178,0.3);
+}
+
+[data-theme='cyberpunk'] {
+  --bg:           #0D0221;
+  --bg-2:         #190033;
+  --violet:       #FF00FF;
+  --violet-lt:    #FF66FF;
+  --cyan:         #00FFFF;
+  --cyan-lt:      #66FFFF;
+  --pink:         #FF007F;
+  --border-glow-v: rgba(255,0,255,0.6);
+  --border-glow-c: rgba(0,255,255,0.6);
+  --glow-v:       0 0 60px rgba(255,0,255,0.4);
+  --glow-c:       0 0 60px rgba(0,255,255,0.4);
+}
+
+[data-theme='forest'] {
+  --bg:           #0B1910;
+  --bg-2:         #112618;
+  --violet:       #22C55E;
+  --violet-lt:    #4ADE80;
+  --cyan:         #A3E635;
+  --cyan-lt:      #BEF264;
+  --pink:         #84CC16;
+  --border-glow-v: rgba(34,197,94,0.5);
+  --border-glow-c: rgba(163,230,53,0.5);
+}
+
+[data-theme='ocean'] {
+  --bg:           #041022;
+  --bg-2:         #091D3C;
+  --violet:       #0EA5E9;
+  --violet-lt:    #38BDF8;
+  --cyan:         #38BDF8;
+  --cyan-lt:      #7DD3FC;
+  --pink:         #2DD4BF;
+  --border-glow-v: rgba(14,165,233,0.5);
+  --border-glow-c: rgba(56,189,248,0.5);
+}
+
+[data-theme='sunset'] {
+  --bg:           #2C0E14;
+  --bg-2:         #401015;
+  --violet:       #F97316;
+  --violet-lt:    #FB923C;
+  --cyan:         #F43F5E;
+  --cyan-lt:      #FB7185;
+  --pink:         #FB923C;
+  --border-glow-v: rgba(249,115,22,0.5);
+  --border-glow-c: rgba(244,63,94,0.5);
+}
+
 /* ── Reset ── */
 *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 html { scroll-behavior: auto; } /* Lenis handles scroll behavior */

@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Terminal, Download, Moon, Sun, Menu, X } from 'lucide-react';
 import MagneticButton from './MagneticButton';
+import ThemeSelector from './ThemeSelector';
 import './Navbar.css';
 
 const links = [
@@ -59,6 +60,8 @@ const Navbar = () => {
         </nav>
 
         <div className="nav-actions">
+          <ThemeSelector />
+
           <MagneticButton
             href="/Sheran_Shah_CV.pdf"
             download
