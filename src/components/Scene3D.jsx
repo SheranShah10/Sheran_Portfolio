@@ -211,11 +211,18 @@ const DogMesh = () => {
       }, "first");
   }, []);
 
+  const { viewport } = useThree();
+  const isMobile = viewport.width < 4;
+
+  const dogScale = isMobile ? 0.65 : 1;
+  const dogPosition = isMobile ? [0, -0.3, 0] : [0.25, -0.55, 0];
+
   return (
     <>
       <primitive
         object={model.scene}
-        position={[0.25, -0.55, 0]}
+        position={dogPosition}
+        scale={[dogScale, dogScale, dogScale]}
         rotation={[0, Math.PI / 3.9, 0]}
       />
       <ambientLight intensity={0.5} />
