@@ -65,10 +65,6 @@ const Hero = () => {
       ref={heroRef}
       onMouseMove={handleMouse}
     >
-      {/* Hero-local gradient orbs (react to mouse) */}
-      <motion.div className="hero-orb hero-orb-v" style={{ x: orbX, y: orbY }} />
-      <motion.div className="hero-orb hero-orb-c" style={{ x: useTransform(orbX, v => -v), y: useTransform(orbY, v => -v) }} />
-
       <div className="container hero-container">
         {/* Badge */}
         <motion.div

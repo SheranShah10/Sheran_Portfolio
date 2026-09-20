@@ -1,4 +1,4 @@
-import { motion } from 'framer-motion';
+import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion';
 import { Code2, ExternalLink } from 'lucide-react';
 import './Projects.css';
 
@@ -47,9 +47,94 @@ const cardVariants = {
   show: { opacity: 1, y: 0, transition: { type: 'spring', stiffness: 100 } },
 };
 
-const Projects = () => (
-  <section className="section projects-section" id="projects">
-    <div className="container">
+const ProjectCard = ({ p, variants }) => {
+  const x = useMotionValue(0);
+  const y = useMotionValue(0);
+
+  const mouseXSpring = useSpring(x, { stiffness: 300, damping: 30 });
+  const mouseYSpring = useSpring(y, { stiffness: 300, damping: 30 });
+
+  const rotateX = useTransform(mouseYSpring, [-0.5, 0.5], ["7deg", "-7deg"]);
+  const rotateY = useTransform(mouseXSpring, [-0.5, 0.5], ["-7deg", "7deg"]);
+
+  const handleMouseMove = (e) => {
+    const rect = e.currentTarget.getBoundingClientRect();
+    const width = rect.width;
+    const height = rect.height;
+    const mouseX = e.clientX - rect.left;
+    const mouseY = e.clientY - rect.top;
+    const xPct = mouseX / width - 0.5;
+    const yPct = mouseY / height - 0.5;
+    x.set(xPct);
+    y.set(yPct);
+  };
+
+  const handleMouseLeave = () => {
+    x.set(0);
+    y.set(0);
+  };
+
+  return (
+    <motion.div
+      className="project-card glass"
+      variants={variants}
+      whileHover={{ scale: 1.02 }}
+      onMouseMove={handleMouseMove}
+      onMouseLeave={handleMouseLeave}
+      style={{ 
+        '--pcolor': p.color,
+        rotateX,
+        rotateY,
+        transformPerspective: 1000
+      }}
+    >
+      {/* Accent top line */}
+      <div className="project-accent" />
+
+      {/* Header */}
+      <div className="project-header">
+        <motion.span
+          className="project-emoji"
+          whileHover={{ scale: 1.3, rotate: -10 }}
+          transition={{ type: 'spring', stiffness: 300 }}
+        >
+          {p.emoji}
+        </motion.span>
+        <div className="project-links">
+          <a href={p.github} target="_blank" rel="noreferrer" className="project-link-btn">
+            <Code2 size={15} />
+          </a>
+        </div>
+      </div>
+
+      {/* Body */}
+      <h3 className="project-title">{p.title}</h3>
+      <p className="project-desc">{p.desc}</p>
+
+      {/* Tech */}
+      <div className="project-techs">
+        {p.tech.map((t, j) => (
+          <span key={j} className="pill">{t}</span>
+        ))}
+      </div>
+
+      {/* Glow */}
+      <div className="project-glow" />
+    </motion.div>
+  );
+};
+
+const Projects = () => {
+  return (
+    <motion.section 
+      className="section projects-section" 
+      id="projects"
+      initial={{ opacity: 0, x: -100 }}
+      whileInView={{ opacity: 1, x: 0 }}
+      viewport={{ once: true, margin: "-100px" }}
+      transition={{ duration: 0.8, type: "spring", bounce: 0.2 }}
+    >
+      <div className="container">
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
@@ -67,50 +152,12 @@ const Projects = () => (
         viewport={{ once: true, margin: '-100px' }}
       >
         {projects.map((p, i) => (
-          <motion.div
-            key={i}
-            className="project-card glass"
-            variants={cardVariants}
-            whileHover={{ scale: 1.02, y: -6 }}
-            style={{ '--pcolor': p.color }}
-          >
-            {/* Accent top line */}
-            <div className="project-accent" />
-
-            {/* Header */}
-            <div className="project-header">
-              <motion.span
-                className="project-emoji"
-                whileHover={{ scale: 1.3, rotate: -10 }}
-                transition={{ type: 'spring', stiffness: 300 }}
-              >
-                {p.emoji}
-              </motion.span>
-              <div className="project-links">
-                <a href={p.github} target="_blank" rel="noreferrer" className="project-link-btn">
-                  <Code2 size={15} />
-                </a>
-              </div>
-            </div>
-
-            {/* Body */}
-            <h3 className="project-title">{p.title}</h3>
-            <p className="project-desc">{p.desc}</p>
-
-            {/* Tech */}
-            <div className="project-techs">
-              {p.tech.map((t, j) => (
-                <span key={j} className="pill">{t}</span>
-              ))}
-            </div>
-
-            {/* Glow */}
-            <div className="project-glow" />
-          </motion.div>
+          <ProjectCard key={i} p={p} variants={cardVariants} />
         ))}
       </motion.div>
     </div>
-  </section>
-);
+    </motion.section>
+  );
+};
 
 export default Projects;

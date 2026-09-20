@@ -4,9 +4,9 @@ import Lenis from 'lenis';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import About from './components/About';
-import DotPath from './components/DotPath';
+import Marquee from './components/Marquee';
 import ScrollJourney from './components/ScrollJourney';
-import SkillTree from './components/SkillTree';
+import BentoSkills from './components/BentoSkills';
 import Projects from './components/Projects';
 import Experience from './components/Experience';
 import Leadership from './components/Leadership';
@@ -16,6 +16,8 @@ import Chatbot from './components/Chatbot';
 import CommandCenter from './components/CommandCenter';
 import BackToTop from './components/BackToTop';
 import Preloader from './components/Preloader';
+import Scene3D from './components/Scene3D';
+import SplashCursor from './components/SplashCursor';
 import './App.css';
 
 function App() {
@@ -41,27 +43,23 @@ function App() {
 
   return (
     <div className="app-root">
+      <SplashCursor />
       <Preloader />
 
       {/* Scroll progress bar */}
       <motion.div className="scroll-bar" style={{ scaleX }} />
 
-      {/* Animated background */}
-      <div className="bg-mesh" aria-hidden="true">
-        <div className="orb orb-1" />
-        <div className="orb orb-2" />
-        <div className="orb orb-3" />
-        <div className="noise-overlay" />
-      </div>
+      {/* 3D WebGL Background */}
+      <Scene3D />
 
       <Navbar />
 
       <main>
         <Hero />
         <About />
-        <DotPath />
+        <Marquee />
         <ScrollJourney />
-        <SkillTree />
+        <BentoSkills />
         <Projects />
         <Experience />
         <Leadership />

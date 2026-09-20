@@ -4,12 +4,12 @@ import { useRef } from 'react';
 import './ScrollJourney.css';
 
 const steps = [
-  { icon: GraduationCap, title: 'Bahria University',    urdu: 'علم کا سفر شروع',    desc: 'Pursuing BSIT with deep focus on algorithms, data structures, and software engineering.', color: 'var(--violet)' },
-  { icon: Video,          title: 'Video Editor @ Khalq', urdu: 'کہانی سنانے کا فن',  desc: 'Directed and edited high-impact visual media, enhancing brand storytelling and engagement.', color: 'var(--cyan)' },
-  { icon: Users,          title: 'NGO Leadership',       urdu: 'لوگوں سے لوگوں تک', desc: 'Served as General Secretary at Business Society, spearheading community events and mentorships.', color: 'var(--pink)' },
-  { icon: Code2,          title: 'Software Engineering', urdu: 'کوڈ میری پہچان',     desc: 'Completed technical internships at GS TEN, CodexCue & Prodigy — shipping real web products.', color: 'var(--green)' },
-  { icon: Lightbulb,      title: 'Product Development',  urdu: 'خیال سے حقیقت تک',  desc: 'Architected and shipped multiple full-stack applications — travel booking, pizzeria, academic systems.', color: 'var(--violet-lt)' },
-  { icon: Brain,          title: 'AI & Data Science',    urdu: 'مستقبل کی طرف',      desc: "Organized Pakistan's largest AI Dev Fest (1,100+ attendees). Now building LLM integrations.", color: 'var(--cyan-lt)' },
+  { icon: GraduationCap, title: 'Bahria University',    desc: 'Pursuing BSIT with deep focus on algorithms, data structures, and software engineering.', color: 'var(--violet)' },
+  { icon: Video,          title: 'Video Editor @ Khalq', desc: 'Directed and edited high-impact visual media, enhancing brand storytelling and engagement.', color: 'var(--cyan)' },
+  { icon: Users,          title: 'NGO Leadership',       desc: 'Served as General Secretary at Business Society, spearheading community events and mentorships.', color: 'var(--pink)' },
+  { icon: Code2,          title: 'Software Engineering', desc: 'Completed technical internships at GS TEN, CodexCue & Prodigy — shipping real web products.', color: 'var(--green)' },
+  { icon: Lightbulb,      title: 'Product Development',  desc: 'Architected and shipped multiple full-stack applications — travel booking, pizzeria, academic systems.', color: 'var(--violet-lt)' },
+  { icon: Brain,          title: 'AI & Data Science',    desc: "Organized Pakistan's largest AI Dev Fest (1,100+ attendees). Now building LLM integrations.", color: 'var(--cyan-lt)' },
 ];
 
 const ScrollJourney = () => {
@@ -65,7 +65,6 @@ const ScrollJourney = () => {
                 >
                   <div className="journey-card-header">
                     <h3 className="journey-title">{step.title}</h3>
-                    <p className="journey-urdu urdu">{step.urdu}</p>
                   </div>
                   <p className="journey-desc">{step.desc}</p>
                   <div className="journey-accent-line" />

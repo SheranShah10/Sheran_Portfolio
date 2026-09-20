@@ -33,8 +33,8 @@ const Navbar = () => {
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
       >
-        <a href="#" className="nav-logo display gradient-text-v">
-          SS
+        <a href="#" className="nav-logo display gradient-text-v" style={{ fontSize: '1.2rem', letterSpacing: '2px' }}>
+          SHERAN.
         </a>
 
         <nav className="nav-links-desktop">

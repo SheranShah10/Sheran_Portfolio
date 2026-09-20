@@ -12,7 +12,14 @@ const identities = [
 ];
 
 const About = () => (
-  <section className="section about-section" id="about">
+  <motion.section 
+    className="section about-section" 
+    id="about"
+    initial={{ opacity: 0, x: 100 }}
+    whileInView={{ opacity: 1, x: 0 }}
+    viewport={{ once: true, margin: "-100px" }}
+    transition={{ duration: 0.8, type: "spring", bounce: 0.2 }}
+  >
     <div className="container">
       <div className="about-grid">
         {/* Left: Text */}
@@ -64,15 +71,6 @@ const About = () => (
             student AI event with over 1,100 attendees.
           </motion.p>
 
-          <motion.p
-            className="about-urdu urdu"
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.4 }}
-          >
-            خیال سے حقیقت تک — ایک کوڈ ایک بار میں
-          </motion.p>
         </div>
 
         {/* Right: Identity Grid */}
@@ -112,7 +110,7 @@ const About = () => (
         </div>
       </div>
     </div>
-  </section>
+  </motion.section>
 );
 
 export default About;
