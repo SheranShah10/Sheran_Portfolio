@@ -4,6 +4,15 @@ import './Projects.css';
 
 const projects = [
   {
+    emoji: '🤖',
+    title: 'InsightAI (RAG Platform)',
+    desc: 'A serverless Retrieval-Augmented Generation (RAG) platform with a 3D glassmorphism UI. Upload complex PDFs and instantly chat with an AI to extract neural-mapped insights.',
+    tech: ['Next.js 15', 'LangChain', 'Gemini API'],
+    github: 'https://github.com/SheranShah10/Rag-System',
+    link: 'https://rag-system-navy-two.vercel.app/',
+    color: 'var(--violet)',
+  },
+  {
     emoji: '🧠',
     title: "Parkinson's ML Predictor (FYP)",
     desc: 'Final Year Project (FYP) focused on predicting Parkinson\'s disease from clinical datasets. This project is currently in progress, with ongoing work in data preprocessing and model training.',
@@ -101,6 +110,11 @@ const ProjectCard = ({ p, variants }) => {
           {p.emoji}
         </motion.span>
         <div className="project-links">
+          {p.link && (
+            <a href={p.link} target="_blank" rel="noreferrer" className="project-link-btn">
+              <ExternalLink size={15} />
+            </a>
+          )}
           <a href={p.github} target="_blank" rel="noreferrer" className="project-link-btn">
             <Code2 size={15} />
           </a>
